@@ -8,7 +8,7 @@ RUN apk add \
     build-base \
     file \
     git \
-    libtirpc-dev \ 
+    libtirpc-dev \
     libtool \
     util-linux-dev \
     zlib-dev
@@ -51,6 +51,8 @@ RUN ./autogen.sh && \
     cd module && \
     make -j "$(getconf _NPROCESSORS_ONLN)" && \
     make install
+    
+RUN depmod -ae `ls /lib/modules`
 
 FROM scratch
 ENTRYPOINT []
